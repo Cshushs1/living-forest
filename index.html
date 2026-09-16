@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Living Forest — Restore the Forest</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #050807;
+      color: #f2f3ed;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
+    }
+
+    .hero {
+      width: 100vw;
+      height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+      position: relative;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(35, 65, 47, 0.18),
+          rgba(5, 8, 7, 0.96) 60%
+        );
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 120px);
+      font-weight: 500;
+      letter-spacing: -4px;
+      line-height: 0.95;
+    }
+
+    .question {
+      margin-top: 30px;
+      font-size: 18px;
+      font-family: Georgia, serif;
+      font-style: italic;
+      opacity: 0.65;
+    }
+
+    .enter {
+      margin-top: 50px;
+
+      padding: 15px 30px;
+
+      background: transparent;
+      color: #f2f3ed;
+
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 100px;
+
+      letter-spacing: 2px;
+      font-size: 11px;
+
+      cursor: pointer;
+
+      transition: all 0.4s ease;
+    }
+
+    .enter:hover {
+      background: #f2f3ed;
+      color: #050807;
+    }
+
+    .status {
+      position: absolute;
+      left: 35px;
+      bottom: 30px;
+
+      font-size: 10px;
+      letter-spacing: 2px;
+      opacity: 0.4;
+    }
+
+    .coordinates {
+      position: absolute;
+      right: 35px;
+      bottom: 30px;
+
+      font-size: 10px;
+      letter-spacing: 2px;
+      opacity: 0.4;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+
+    <div class="eyebrow">
+      Living Forest · Hong Kong
+    </div>
+
+    <h1>
+      THE FOREST<br>
+      IS FORGETTING.
+    </h1>
+
+    <p class="question">
+      What if the forest could remember?
+    </p>
+
+    <button class="enter">
+      ENTER THE LIVING FOREST
+    </button>
+
+    <div class="status">
+      FOREST VITALITY · 12%
+    </div>
+
+    <div class="coordinates">
+      22.3193° N · 114.1694° E
+    </div>
+
+  </section>
+
+</body>
+</html>
