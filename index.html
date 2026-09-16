@@ -1,144 +1,988 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Living Forest — Restore the Forest</title>
 
   <style>
+    /* =========================
+       RESET
+    ========================== */
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html,
     body {
-      background: #050807;
-      color: #f2f3ed;
-      font-family: Arial, Helvetica, sans-serif;
-      overflow: hidden;
+      width: 100%;
+      height: 100%;
     }
 
-    .hero {
+    body {
+      background: #020504;
+      color: #f0f2e9;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* =========================
+       MAIN FOREST
+    ========================== */
+
+    .forest {
+      position: relative;
+
       width: 100vw;
       height: 100vh;
 
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      overflow: hidden;
 
-      text-align: center;
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          ellipse at 50% 60%,
+          rgba(37, 74, 51, 0.45) 0%,
+          rgba(12, 28, 19, 0.75) 28%,
+          rgba(3, 10, 7, 0.95) 58%,
+          #020504 100%
+        );
+    }
+
+    /* Dark vignette */
+
+    .forest::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      pointer-events: none;
 
       background:
         radial-gradient(
           circle at center,
-          rgba(35, 65, 47, 0.18),
-          rgba(5, 8, 7, 0.96) 60%
+          transparent 20%,
+          rgba(0, 0, 0, 0.22) 55%,
+          rgba(0, 0, 0, 0.72) 100%
         );
+
+      z-index: 8;
     }
 
-    .eyebrow {
-      font-size: 12px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      opacity: 0.45;
-      margin-bottom: 28px;
+    /* =========================
+       DISTANT FOREST LIGHT
+    ========================== */
+
+    .forest-light {
+      position: absolute;
+
+      width: 900px;
+      height: 900px;
+
+      left: 50%;
+      top: 55%;
+
+      transform: translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(133, 184, 126, 0.14) 0%,
+          rgba(66, 115, 76, 0.08) 28%,
+          transparent 68%
+        );
+
+      filter: blur(35px);
+
+      animation: forestBreath 7s ease-in-out infinite;
+
+      z-index: 1;
     }
 
-    h1 {
-      font-size: clamp(48px, 8vw, 120px);
-      font-weight: 500;
-      letter-spacing: -4px;
-      line-height: 0.95;
+    @keyframes forestBreath {
+      0%,
+      100% {
+        opacity: 0.45;
+        transform: translate(-50%, -50%) scale(0.92);
+      }
+
+      50% {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(1.08);
+      }
     }
 
-    .question {
-      margin-top: 30px;
-      font-size: 18px;
-      font-family: Georgia, serif;
-      font-style: italic;
+    /* =========================
+       TREES
+    ========================== */
+
+    .tree {
+      position: absolute;
+
+      bottom: -18%;
+
+      width: 75px;
+      height: 110%;
+
+      border-radius: 50% 50% 20% 20%;
+
+      background:
+        linear-gradient(
+          90deg,
+          #010302 0%,
+          #07100b 45%,
+          #020403 100%
+        );
+
+      z-index: 2;
+    }
+
+    .tree::before,
+    .tree::after {
+      content: "";
+
+      position: absolute;
+
+      left: 40%;
+
+      width: 280px;
+      height: 32px;
+
+      background:
+        linear-gradient(
+          to right,
+          #020403,
+          #040907
+        );
+
+      border-radius: 100%;
+
+      transform-origin: left center;
+    }
+
+    .tree::before {
+      top: 27%;
+      transform: rotate(-38deg);
+    }
+
+    .tree::after {
+      top: 43%;
+      transform: rotate(34deg);
+    }
+
+    .tree-1 {
+      left: 5%;
+      transform: rotate(-3deg) scale(1.35);
+    }
+
+    .tree-2 {
+      left: 23%;
+      opacity: 0.52;
+      transform: rotate(2deg) scale(0.82);
+    }
+
+    .tree-3 {
+      right: 21%;
+      opacity: 0.5;
+      transform: rotate(-2deg) scale(0.88);
+    }
+
+    .tree-4 {
+      right: 4%;
+      transform: rotate(3deg) scale(1.4);
+    }
+
+    /* =========================
+       GROUND
+    ========================== */
+
+    .ground {
+      position: absolute;
+
+      left: -10%;
+      bottom: -16%;
+
+      width: 120%;
+      height: 40%;
+
+      border-radius: 50% 50% 0 0;
+
+      background:
+        radial-gradient(
+          ellipse at center,
+          #07110b 0%,
+          #030704 45%,
+          #010302 80%
+        );
+
+      z-index: 3;
+    }
+
+    /* =========================
+       FOG
+    ========================== */
+
+    .fog {
+      position: absolute;
+
+      left: -20%;
+      bottom: -80px;
+
+      width: 140%;
+      height: 330px;
+
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(151, 174, 154, 0.11),
+          rgba(93, 122, 100, 0.05) 35%,
+          transparent 70%
+        );
+
+      filter: blur(35px);
+
+      z-index: 4;
+
+      animation: fogMove 13s ease-in-out infinite alternate;
+    }
+
+    .fog-2 {
+      bottom: 70px;
+
+      opacity: 0.35;
+
+      animation-duration: 19s;
+      animation-direction: alternate-reverse;
+    }
+
+    @keyframes fogMove {
+      from {
+        transform: translateX(-5%);
+      }
+
+      to {
+        transform: translateX(5%);
+      }
+    }
+
+    /* =========================
+       FIREFLIES
+    ========================== */
+
+    .fireflies {
+      position: absolute;
+      inset: 0;
+
+      z-index: 5;
+
+      pointer-events: none;
+    }
+
+    .firefly {
+      position: absolute;
+
+      width: 3px;
+      height: 3px;
+
+      border-radius: 50%;
+
+      background: #c8dcae;
+
+      box-shadow:
+        0 0 8px rgba(199, 222, 173, 0.8),
+        0 0 18px rgba(157, 195, 135, 0.45);
+
+      opacity: 0;
+
+      animation:
+        fireflyGlow 4s ease-in-out infinite,
+        fireflyFloat 8s ease-in-out infinite alternate;
+    }
+
+    .firefly:nth-child(1) {
+      left: 19%;
+      top: 41%;
+      animation-delay: 0s;
+    }
+
+    .firefly:nth-child(2) {
+      left: 31%;
+      top: 66%;
+      animation-delay: 1.2s;
+    }
+
+    .firefly:nth-child(3) {
+      left: 70%;
+      top: 38%;
+      animation-delay: 2.1s;
+    }
+
+    .firefly:nth-child(4) {
+      left: 78%;
+      top: 62%;
+      animation-delay: 0.7s;
+    }
+
+    .firefly:nth-child(5) {
+      left: 43%;
+      top: 29%;
+      animation-delay: 3s;
+    }
+
+    .firefly:nth-child(6) {
+      left: 59%;
+      top: 72%;
+      animation-delay: 1.7s;
+    }
+
+    .firefly:nth-child(7) {
+      left: 13%;
+      top: 72%;
+      animation-delay: 2.8s;
+    }
+
+    .firefly:nth-child(8) {
+      left: 88%;
+      top: 48%;
+      animation-delay: 1s;
+    }
+
+    @keyframes fireflyGlow {
+      0%,
+      100% {
+        opacity: 0.05;
+      }
+
+      50% {
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes fireflyFloat {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(18px, -25px);
+      }
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .brand {
+      position: absolute;
+
+      top: 32px;
+      left: 38px;
+
+      z-index: 20;
+
+      font-size: 10px;
+      letter-spacing: 3.5px;
+
       opacity: 0.65;
     }
 
+    .chapter {
+      position: absolute;
+
+      top: 32px;
+      right: 38px;
+
+      z-index: 20;
+
+      font-size: 9px;
+      letter-spacing: 2.5px;
+
+      opacity: 0.42;
+    }
+
+    /* =========================
+       HERO CONTENT
+    ========================== */
+
+    .content {
+      position: relative;
+
+      z-index: 15;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      text-align: center;
+
+      opacity: 0;
+
+      animation: contentReveal 2.3s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes contentReveal {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .location {
+      margin-bottom: 34px;
+
+      font-size: 9px;
+      letter-spacing: 5px;
+
+      text-transform: uppercase;
+
+      opacity: 0.45;
+    }
+
+    h1 {
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(58px, 8.3vw, 128px);
+
+      font-weight: 400;
+
+      line-height: 0.86;
+
+      letter-spacing: -5px;
+
+      text-shadow:
+        0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .question {
+      margin-top: 38px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 17px;
+
+      font-style: italic;
+
+      letter-spacing: 0.3px;
+
+      opacity: 0.62;
+    }
+
+    /* =========================
+       ENTER BUTTON
+    ========================== */
+
     .enter {
-      margin-top: 50px;
+      position: relative;
 
-      padding: 15px 30px;
+      margin-top: 52px;
 
-      background: transparent;
-      color: #f2f3ed;
+      padding: 16px 30px;
 
-      border: 1px solid rgba(255,255,255,0.35);
+      border:
+        1px solid
+        rgba(238, 243, 231, 0.3);
+
       border-radius: 100px;
 
-      letter-spacing: 2px;
-      font-size: 11px;
+      background:
+        rgba(255, 255, 255, 0.025);
 
-      cursor: pointer;
+      color: #eef2e8;
 
-      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+
+      font-size: 9px;
+
+      letter-spacing: 2.8px;
+
+      cursor: none;
+
+      transition:
+        background 0.4s ease,
+        color 0.4s ease,
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
     }
 
     .enter:hover {
-      background: #f2f3ed;
-      color: #050807;
+      color: #07100a;
+
+      background: #edf1e6;
+
+      transform: scale(1.05);
+
+      box-shadow:
+        0 0 45px
+        rgba(177, 209, 157, 0.18);
     }
 
-    .status {
+    /* =========================
+       FOREST VITALITY
+    ========================== */
+
+    .vitality {
       position: absolute;
-      left: 35px;
+
+      left: 38px;
       bottom: 30px;
 
-      font-size: 10px;
-      letter-spacing: 2px;
-      opacity: 0.4;
+      z-index: 20;
+
+      width: 170px;
+    }
+
+    .vitality-label {
+      display: flex;
+      justify-content: space-between;
+
+      margin-bottom: 8px;
+
+      font-size: 8px;
+      letter-spacing: 1.8px;
+
+      opacity: 0.5;
+    }
+
+    .vitality-track {
+      width: 100%;
+      height: 1px;
+
+      background:
+        rgba(255, 255, 255, 0.15);
+    }
+
+    .vitality-fill {
+      width: 12%;
+      height: 100%;
+
+      background:
+        rgba(204, 226, 188, 0.8);
+
+      box-shadow:
+        0 0 8px
+        rgba(176, 210, 154, 0.4);
     }
 
     .coordinates {
       position: absolute;
-      right: 35px;
+
+      right: 38px;
       bottom: 30px;
 
-      font-size: 10px;
+      z-index: 20;
+
+      font-size: 8px;
+
       letter-spacing: 2px;
-      opacity: 0.4;
+
+      opacity: 0.42;
     }
+
+    /* =========================
+       CUSTOM CURSOR
+    ========================== */
+
+    .cursor {
+      position: fixed;
+
+      left: 0;
+      top: 0;
+
+      width: 18px;
+      height: 18px;
+
+      border:
+        1px solid
+        rgba(220, 235, 209, 0.8);
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      transform:
+        translate(-50%, -50%);
+
+      z-index: 100;
+
+      transition:
+        width 0.25s ease,
+        height 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .cursor-light {
+      position: fixed;
+
+      left: 0;
+      top: 0;
+
+      width: 500px;
+      height: 500px;
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      transform:
+        translate(-50%, -50%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(121, 180, 119, 0.13) 0%,
+          rgba(73, 127, 79, 0.07) 30%,
+          rgba(33, 73, 45, 0.025) 48%,
+          transparent 70%
+        );
+
+      filter: blur(10px);
+
+      z-index: 7;
+    }
+
+    /* =========================
+       TRANSITION
+    ========================== */
+
+    .transition-cover {
+      position: fixed;
+
+      inset: 0;
+
+      background: #06100b;
+
+      z-index: 200;
+
+      pointer-events: none;
+
+      opacity: 0;
+
+      transition: opacity 1.2s ease;
+    }
+
+    .transition-cover.active {
+      opacity: 1;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 700px) {
+
+      body {
+        cursor: auto;
+      }
+
+      .cursor,
+      .cursor-light {
+        display: none;
+      }
+
+      .brand {
+        left: 20px;
+        top: 24px;
+      }
+
+      .chapter {
+        right: 20px;
+        top: 24px;
+      }
+
+      h1 {
+        font-size: 52px;
+        letter-spacing: -2.5px;
+      }
+
+      .location {
+        font-size: 8px;
+        letter-spacing: 3px;
+      }
+
+      .question {
+        font-size: 15px;
+      }
+
+      .enter {
+        cursor: pointer;
+      }
+
+      .vitality {
+        left: 20px;
+        bottom: 24px;
+
+        width: 130px;
+      }
+
+      .coordinates {
+        right: 20px;
+        bottom: 24px;
+      }
+
+      .tree-2,
+      .tree-3 {
+        display: none;
+      }
+    }
+
   </style>
 </head>
 
+
 <body>
 
-  <section class="hero">
+  <main class="forest" id="forest">
 
-    <div class="eyebrow">
-      Living Forest · Hong Kong
+    <!-- Forest atmosphere -->
+
+    <div class="forest-light"></div>
+
+    <div class="tree tree-1"></div>
+    <div class="tree tree-2"></div>
+    <div class="tree tree-3"></div>
+    <div class="tree tree-4"></div>
+
+    <div class="ground"></div>
+
+    <div class="fog"></div>
+    <div class="fog fog-2"></div>
+
+
+    <!-- Fireflies -->
+
+    <div class="fireflies">
+
+      <span class="firefly"></span>
+      <span class="firefly"></span>
+      <span class="firefly"></span>
+      <span class="firefly"></span>
+
+      <span class="firefly"></span>
+      <span class="firefly"></span>
+      <span class="firefly"></span>
+      <span class="firefly"></span>
+
     </div>
 
-    <h1>
-      THE FOREST<br>
-      IS FORGETTING.
-    </h1>
 
-    <p class="question">
-      What if the forest could remember?
-    </p>
+    <!-- Header -->
 
-    <button class="enter">
-      ENTER THE LIVING FOREST
-    </button>
-
-    <div class="status">
-      FOREST VITALITY · 12%
+    <div class="brand">
+      LIVING FOREST
     </div>
+
+    <div class="chapter">
+      PROLOGUE · 00
+    </div>
+
+
+    <!-- Main story -->
+
+    <section class="content">
+
+      <div class="location">
+        HONG KONG · 22.3193° N
+      </div>
+
+      <h1>
+        THE FOREST
+        <br />
+        IS FORGETTING.
+      </h1>
+
+      <p class="question">
+        What if the forest could remember?
+      </p>
+
+      <button
+        class="enter"
+        id="enterButton"
+      >
+        ENTER THE LIVING FOREST
+      </button>
+
+    </section>
+
+
+    <!-- Forest vitality -->
+
+    <div class="vitality">
+
+      <div class="vitality-label">
+
+        <span>
+          FOREST VITALITY
+        </span>
+
+        <span>
+          12%
+        </span>
+
+      </div>
+
+      <div class="vitality-track">
+
+        <div
+          class="vitality-fill"
+        ></div>
+
+      </div>
+
+    </div>
+
 
     <div class="coordinates">
-      22.3193° N · 114.1694° E
+      114.1694° E · HONG KONG
     </div>
 
-  </section>
+  </main>
+
+
+  <!-- Mouse interaction -->
+
+  <div class="cursor"></div>
+
+  <div class="cursor-light"></div>
+
+
+  <!-- Transition -->
+
+  <div
+    class="transition-cover"
+    id="transitionCover"
+  ></div>
+
+
+  <script>
+
+    /* =========================
+       CURSOR
+    ========================== */
+
+    const cursor =
+      document.querySelector(".cursor");
+
+    const cursorLight =
+      document.querySelector(".cursor-light");
+
+    document.addEventListener(
+      "mousemove",
+      function (event) {
+
+        cursor.style.left =
+          event.clientX + "px";
+
+        cursor.style.top =
+          event.clientY + "px";
+
+        cursorLight.style.left =
+          event.clientX + "px";
+
+        cursorLight.style.top =
+          event.clientY + "px";
+
+      }
+    );
+
+
+    /* =========================
+       ENTER BUTTON
+    ========================== */
+
+    const enterButton =
+      document.getElementById(
+        "enterButton"
+      );
+
+    const transitionCover =
+      document.getElementById(
+        "transitionCover"
+      );
+
+
+    enterButton.addEventListener(
+      "mouseenter",
+      function () {
+
+        cursor.style.width =
+          "46px";
+
+        cursor.style.height =
+          "46px";
+
+      }
+    );
+
+
+    enterButton.addEventListener(
+      "mouseleave",
+      function () {
+
+        cursor.style.width =
+          "18px";
+
+        cursor.style.height =
+          "18px";
+
+      }
+    );
+
+
+    /* =========================
+       NEXT CHAPTER
+       We will build this next.
+    ========================== */
+
+    enterButton.addEventListener(
+      "click",
+      function () {
+
+        transitionCover.classList.add(
+          "active"
+        );
+
+        setTimeout(
+          function () {
+
+            transitionCover.classList.remove(
+              "active"
+            );
+
+          },
+          1400
+        );
+
+      }
+    );
+
+  </script>
 
 </body>
 </html>
