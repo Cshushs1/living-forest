@@ -1,988 +1,2402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Living Forest — Restore the Forest</title>
-
-  <style>
-    /* =========================
-       RESET
-    ========================== */
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Living Forest — Hong Kong</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#f4f3ee;
+  color:#20231f;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+button{
+  font:inherit;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* ================= NAV ================= */
+
+nav{
+  height:72px;
+  padding:0 4vw;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  border-bottom:1px solid #d4d5cf;
+
+  background:rgba(244,243,238,.94);
+
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  font-size:15px;
+  letter-spacing:4px;
+}
+
+.nav-links{
+  display:flex;
+  gap:30px;
+
+  font-size:10px;
+  letter-spacing:1.4px;
+}
+
+.nav-links a{
+  opacity:.55;
+}
+
+.nav-links a:hover{
+  opacity:1;
+}
+
+/* ================= COMMON ================= */
+
+.section{
+  padding:110px 4vw;
+  border-bottom:1px solid #d4d5cf;
+}
+
+.section-header{
+  display:grid;
+  grid-template-columns:130px 1fr;
+  margin-bottom:65px;
+}
+
+.number{
+  font-size:12px;
+  opacity:.45;
+}
+
+.title{
+  font-weight:400;
+  font-size:clamp(50px,7vw,100px);
+  letter-spacing:-5px;
+  line-height:.9;
+}
+
+.description{
+  max-width:460px;
+  margin-left:130px;
+  margin-bottom:60px;
+
+  line-height:1.8;
+  font-size:13px;
+  color:#686c66;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:760px;
+  padding:70px 4vw 45px;
+
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:30px;
+
+  border-bottom:1px solid #d4d5cf;
+}
+
+.hero-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.hero-small{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#777b74;
+  margin-bottom:35px;
+}
+
+.hero h1{
+  font-size:clamp(75px,10vw,150px);
+  font-weight:300;
+  line-height:.8;
+  letter-spacing:-8px;
+}
+
+.hero p{
+  margin-top:40px;
+  max-width:350px;
+  font-size:13px;
+  line-height:1.8;
+  color:#6d716a;
+}
+
+.hero-visual{
+  min-height:610px;
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(to top,#d8dcd4 0 24%,transparent 24%),
+    linear-gradient(160deg,#f8f7f3,#e5e7e0);
+}
+
+/* minimalist mountain */
+
+.mountain{
+  position:absolute;
+  width:75%;
+  height:43%;
+  bottom:24%;
+  left:10%;
+
+  background:#d6dad3;
+
+  clip-path:polygon(
+    0 100%,
+    20% 53%,
+    34% 72%,
+    53% 20%,
+    70% 58%,
+    84% 40%,
+    100% 100%
+  );
+}
+
+/* hero tree */
+
+.hero-tree{
+  position:absolute;
+  left:58%;
+  bottom:24%;
+  width:18px;
+  height:310px;
+  background:#667064;
+}
+
+.hero-tree::before{
+  content:"";
+  position:absolute;
+
+  width:260px;
+  height:230px;
+
+  left:50%;
+  top:-95px;
+
+  transform:translateX(-50%);
+
+  border-radius:48%;
+
+  background:#aeb8aa;
+}
+
+/* people */
+
+.person{
+  width:10px;
+  height:42px;
+  position:absolute;
+}
+
+.person::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:2px;
+
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+  background:#444943;
+}
+
+.person::after{
+  content:"";
+  position:absolute;
+  top:9px;
+  left:3px;
+
+  width:4px;
+  height:23px;
+
+  background:#444943;
+
+  box-shadow:
+    -4px 21px 0 -1px #444943,
+    4px 21px 0 -1px #444943;
+}
+
+.p1{left:30%;bottom:25%;}
+.p2{left:37%;bottom:25%;transform:scale(.8);}
+.p3{right:15%;bottom:25%;}
+
+/* ================= WORLD ================= */
+
+.world-layout{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:80px;
+}
+
+.world-copy{
+  font-size:23px;
+  line-height:1.5;
+  max-width:400px;
+}
+
+.world-image{
+  height:450px;
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(to top,#cbd0c7,transparent 45%),
+    #e7e8e2;
+}
+
+.world-image::before{
+  content:"";
+
+  position:absolute;
+  width:110%;
+  height:60%;
+  left:-5%;
+  bottom:0;
+
+  background:#bdc5ba;
+
+  clip-path:polygon(
+    0 100%,
+    0 65%,
+    13% 44%,
+    23% 61%,
+    40% 23%,
+    51% 50%,
+    66% 28%,
+    79% 54%,
+    90% 32%,
+    100% 57%,
+    100% 100%
+  );
+}
+
+/* =========================================================
+   02 MASTERPLAN
+========================================================= */
+
+.masterplan-section{
+  background:#eeeee9;
+}
+
+.masterplan-layout{
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:50px;
+}
+
+.zone-menu{
+  border-top:1px solid #bfc2bb;
+}
+
+.zone-button{
+  width:100%;
+
+  display:grid;
+  grid-template-columns:35px 1fr;
+
+  gap:8px;
+
+  padding:18px 5px;
+
+  border:none;
+  border-bottom:1px solid #cfd1cb;
+
+  background:transparent;
+
+  text-align:left;
+  cursor:pointer;
+
+  color:#555a53;
+
+  transition:.25s;
+}
+
+.zone-button:hover,
+.zone-button.active{
+  color:#111;
+  padding-left:12px;
+}
 
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-    }
-
-    body {
-      background: #020504;
-      color: #f0f2e9;
-      font-family: Arial, Helvetica, sans-serif;
-      overflow: hidden;
-      cursor: none;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    /* =========================
-       MAIN FOREST
-    ========================== */
-
-    .forest {
-      position: relative;
+.zone-button.active{
+  background:#e1e4dc;
+}
 
-      width: 100vw;
-      height: 100vh;
+.zone-num{
+  font-size:10px;
+  opacity:.5;
+}
 
-      overflow: hidden;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background:
-        radial-gradient(
-          ellipse at 50% 60%,
-          rgba(37, 74, 51, 0.45) 0%,
-          rgba(12, 28, 19, 0.75) 28%,
-          rgba(3, 10, 7, 0.95) 58%,
-          #020504 100%
-        );
-    }
+.zone-name{
+  font-size:12px;
+}
 
-    /* Dark vignette */
+.zone-cn{
+  display:block;
+  font-size:10px;
+  margin-top:4px;
+  opacity:.55;
+}
 
-    .forest::after {
-      content: "";
+/* ================= MODEL VIEWER ================= */
 
-      position: absolute;
-      inset: 0;
+.model-viewer{
+  min-height:650px;
 
-      pointer-events: none;
+  position:relative;
+  overflow:hidden;
 
-      background:
-        radial-gradient(
-          circle at center,
-          transparent 20%,
-          rgba(0, 0, 0, 0.22) 55%,
-          rgba(0, 0, 0, 0.72) 100%
-        );
+  background:#e3e5df;
+  border:1px solid #c9cbc5;
 
-      z-index: 8;
-    }
+  cursor:grab;
+  user-select:none;
+}
 
-    /* =========================
-       DISTANT FOREST LIGHT
-    ========================== */
+.model-viewer:active{
+  cursor:grabbing;
+}
 
-    .forest-light {
-      position: absolute;
+.viewer-top{
+  position:absolute;
 
-      width: 900px;
-      height: 900px;
+  left:25px;
+  right:25px;
+  top:22px;
 
-      left: 50%;
-      top: 55%;
-
-      transform: translate(-50%, -50%);
+  display:flex;
+  justify-content:space-between;
 
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(133, 184, 126, 0.14) 0%,
-          rgba(66, 115, 76, 0.08) 28%,
-          transparent 68%
-        );
-
-      filter: blur(35px);
-
-      animation: forestBreath 7s ease-in-out infinite;
-
-      z-index: 1;
-    }
-
-    @keyframes forestBreath {
-      0%,
-      100% {
-        opacity: 0.45;
-        transform: translate(-50%, -50%) scale(0.92);
-      }
+  z-index:20;
 
-      50% {
-        opacity: 0.9;
-        transform: translate(-50%, -50%) scale(1.08);
-      }
-    }
-
-    /* =========================
-       TREES
-    ========================== */
-
-    .tree {
-      position: absolute;
+  font-size:9px;
+  letter-spacing:2px;
+  color:#656a63;
+}
 
-      bottom: -18%;
-
-      width: 75px;
-      height: 110%;
-
-      border-radius: 50% 50% 20% 20%;
+.drag-label{
+  opacity:.55;
+}
 
-      background:
-        linear-gradient(
-          90deg,
-          #010302 0%,
-          #07100b 45%,
-          #020403 100%
-        );
+/* ================= 3D STAGE ================= */
 
-      z-index: 2;
-    }
-
-    .tree::before,
-    .tree::after {
-      content: "";
-
-      position: absolute;
+.stage{
+  position:absolute;
+  inset:80px 5% 60px;
 
-      left: 40%;
+  perspective:1100px;
+}
 
-      width: 280px;
-      height: 32px;
+.model{
+  width:100%;
+  height:100%;
 
-      background:
-        linear-gradient(
-          to right,
-          #020403,
-          #040907
-        );
+  position:relative;
 
-      border-radius: 100%;
+  transform-style:preserve-3d;
+  transform:rotateX(59deg) rotateZ(-28deg);
 
-      transform-origin: left center;
-    }
+  transition:transform .15s linear;
+}
 
-    .tree::before {
-      top: 27%;
-      transform: rotate(-38deg);
-    }
+/* ground */
 
-    .tree::after {
-      top: 43%;
-      transform: rotate(34deg);
-    }
+.model-ground{
+  position:absolute;
 
-    .tree-1 {
-      left: 5%;
-      transform: rotate(-3deg) scale(1.35);
-    }
+  width:70%;
+  height:68%;
 
-    .tree-2 {
-      left: 23%;
-      opacity: 0.52;
-      transform: rotate(2deg) scale(0.82);
-    }
+  left:15%;
+  top:16%;
 
-    .tree-3 {
-      right: 21%;
-      opacity: 0.5;
-      transform: rotate(-2deg) scale(0.88);
-    }
+  background:#d5d8d0;
+  border:1px solid #bfc4ba;
 
-    .tree-4 {
-      right: 4%;
-      transform: rotate(3deg) scale(1.4);
-    }
+  border-radius:3px;
 
-    /* =========================
-       GROUND
-    ========================== */
+  box-shadow:35px 35px 0 rgba(0,0,0,.025);
+}
 
-    .ground {
-      position: absolute;
+/* paths */
 
-      left: -10%;
-      bottom: -16%;
+.path{
+  position:absolute;
 
-      width: 120%;
-      height: 40%;
+  height:16px;
 
-      border-radius: 50% 50% 0 0;
+  background:#f4f3ef;
+  border:1px solid #c7cac3;
 
-      background:
-        radial-gradient(
-          ellipse at center,
-          #07110b 0%,
-          #030704 45%,
-          #010302 80%
-        );
+  transform-origin:left center;
+}
 
-      z-index: 3;
-    }
+.path-a{
+  width:48%;
+  left:27%;
+  top:49%;
+}
 
-    /* =========================
-       FOG
-    ========================== */
+.path-b{
+  width:40%;
+  left:48%;
+  top:31%;
+  transform:rotate(90deg);
+}
 
-    .fog {
-      position: absolute;
+.path-c{
+  width:31%;
+  left:39%;
+  top:38%;
+  transform:rotate(42deg);
+}
 
-      left: -20%;
-      bottom: -80px;
+/* trees */
 
-      width: 140%;
-      height: 330px;
+.tree-model{
+  position:absolute;
 
-      background:
-        radial-gradient(
-          ellipse at center,
-          rgba(151, 174, 154, 0.11),
-          rgba(93, 122, 100, 0.05) 35%,
-          transparent 70%
-        );
+  width:32px;
+  height:32px;
 
-      filter: blur(35px);
-
-      z-index: 4;
+  border-radius:50%;
 
-      animation: fogMove 13s ease-in-out infinite alternate;
-    }
-
-    .fog-2 {
-      bottom: 70px;
-
-      opacity: 0.35;
-
-      animation-duration: 19s;
-      animation-direction: alternate-reverse;
-    }
-
-    @keyframes fogMove {
-      from {
-        transform: translateX(-5%);
-      }
-
-      to {
-        transform: translateX(5%);
-      }
-    }
-
-    /* =========================
-       FIREFLIES
-    ========================== */
-
-    .fireflies {
-      position: absolute;
-      inset: 0;
-
-      z-index: 5;
-
-      pointer-events: none;
-    }
-
-    .firefly {
-      position: absolute;
-
-      width: 3px;
-      height: 3px;
-
-      border-radius: 50%;
-
-      background: #c8dcae;
-
-      box-shadow:
-        0 0 8px rgba(199, 222, 173, 0.8),
-        0 0 18px rgba(157, 195, 135, 0.45);
-
-      opacity: 0;
+  background:#9faa98;
 
-      animation:
-        fireflyGlow 4s ease-in-out infinite,
-        fireflyFloat 8s ease-in-out infinite alternate;
-    }
+  box-shadow:
+    inset -7px -7px 0 rgba(0,0,0,.05),
+    8px 8px 0 rgba(0,0,0,.025);
+}
 
-    .firefly:nth-child(1) {
-      left: 19%;
-      top: 41%;
-      animation-delay: 0s;
-    }
+.tree-model::after{
+  content:"";
 
-    .firefly:nth-child(2) {
-      left: 31%;
-      top: 66%;
-      animation-delay: 1.2s;
-    }
+  position:absolute;
 
-    .firefly:nth-child(3) {
-      left: 70%;
-      top: 38%;
-      animation-delay: 2.1s;
-    }
+  width:4px;
+  height:26px;
 
-    .firefly:nth-child(4) {
-      left: 78%;
-      top: 62%;
-      animation-delay: 0.7s;
-    }
+  background:#7d7568;
 
-    .firefly:nth-child(5) {
-      left: 43%;
-      top: 29%;
-      animation-delay: 3s;
-    }
+  left:14px;
+  top:25px;
+}
 
-    .firefly:nth-child(6) {
-      left: 59%;
-      top: 72%;
-      animation-delay: 1.7s;
-    }
+.t1{left:25%;top:27%;}
+.t2{left:34%;top:61%;transform:scale(.8);}
+.t3{left:64%;top:25%;transform:scale(1.2);}
+.t4{left:70%;top:57%;transform:scale(.75);}
+.t5{left:48%;top:67%;transform:scale(.9);}
+.t6{left:21%;top:48%;transform:scale(.7);}
+.t7{left:77%;top:39%;transform:scale(.9);}
+.t8{left:57%;top:19%;transform:scale(.7);}
 
-    .firefly:nth-child(7) {
-      left: 13%;
-      top: 72%;
-      animation-delay: 2.8s;
-    }
+/* buildings */
 
-    .firefly:nth-child(8) {
-      left: 88%;
-      top: 48%;
-      animation-delay: 1s;
-    }
+.building{
+  position:absolute;
 
-    @keyframes fireflyGlow {
-      0%,
-      100% {
-        opacity: 0.05;
-      }
+  background:#f4f3ee;
+  border:1px solid #bfc3bb;
 
-      50% {
-        opacity: 0.9;
-      }
-    }
+  box-shadow:
+    9px 10px 0 #c9ccc5;
 
-    @keyframes fireflyFloat {
-      from {
-        transform: translate(0, 0);
-      }
+  transition:.35s;
+}
 
-      to {
-        transform: translate(18px, -25px);
-      }
-    }
+.building:hover{
+  background:#d8ded2;
+}
 
-    /* =========================
-       HEADER
-    ========================== */
+/* entrance */
 
-    .brand {
-      position: absolute;
+.entrance-building{
+  width:120px;
+  height:55px;
 
-      top: 32px;
-      left: 38px;
+  left:24%;
+  top:65%;
+}
 
-      z-index: 20;
+/* exploration */
 
-      font-size: 10px;
-      letter-spacing: 3.5px;
+.explore-building{
+  width:85px;
+  height:65px;
 
-      opacity: 0.65;
-    }
+  left:22%;
+  top:34%;
 
-    .chapter {
-      position: absolute;
+  border-radius:50%;
+}
 
-      top: 32px;
-      right: 38px;
+/* investigation */
 
-      z-index: 20;
+.investigate-building{
+  width:120px;
+  height:80px;
 
-      font-size: 9px;
-      letter-spacing: 2.5px;
+  left:62%;
+  top:30%;
+}
 
-      opacity: 0.42;
-    }
+/* restoration */
 
-    /* =========================
-       HERO CONTENT
-    ========================== */
+.restore-building{
+  width:125px;
+  height:90px;
 
-    .content {
-      position: relative;
+  left:60%;
+  top:57%;
+}
 
-      z-index: 15;
+/* village */
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+.village-building{
+  width:145px;
+  height:60px;
 
-      text-align: center;
+  left:34%;
+  top:22%;
+}
 
-      opacity: 0;
+/* mother tree */
 
-      animation: contentReveal 2.3s ease forwards;
-      animation-delay: 0.5s;
-    }
+.mother-tree-model{
+  position:absolute;
 
-    @keyframes contentReveal {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
+  width:105px;
+  height:105px;
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  border-radius:50%;
 
-    .location {
-      margin-bottom: 34px;
+  left:45%;
+  top:42%;
 
-      font-size: 9px;
-      letter-spacing: 5px;
+  background:#879681;
 
-      text-transform: uppercase;
+  border:13px solid #e8e9e3;
 
-      opacity: 0.45;
-    }
+  box-shadow:
+    0 0 0 1px #aeb4aa,
+    12px 14px 0 rgba(0,0,0,.035);
+}
 
-    h1 {
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+.mother-tree-model::before{
+  content:"";
 
-      font-size: clamp(58px, 8.3vw, 128px);
+  position:absolute;
 
-      font-weight: 400;
+  width:18px;
+  height:115px;
 
-      line-height: 0.86;
+  background:#777368;
 
-      letter-spacing: -5px;
+  left:30px;
+  top:-52px;
 
-      text-shadow:
-        0 4px 30px rgba(0, 0, 0, 0.4);
-    }
+  transform:rotate(-10deg);
+}
 
-    .question {
-      margin-top: 38px;
+/* ================= MODEL LABELS ================= */
 
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+.model-label{
+  position:absolute;
 
-      font-size: 17px;
+  padding:7px 9px;
 
-      font-style: italic;
+  background:rgba(244,243,238,.92);
+  border:1px solid #c7cac3;
 
-      letter-spacing: 0.3px;
+  font-size:9px;
 
-      opacity: 0.62;
-    }
+  z-index:10;
+}
 
-    /* =========================
-       ENTER BUTTON
-    ========================== */
+.label1{left:18%;bottom:10%;}
+.label2{left:10%;top:28%;}
+.label3{right:12%;top:20%;}
+.label4{right:7%;bottom:19%;}
+.label5{left:46%;top:4%;}
+.label6{left:29%;top:8%;}
 
-    .enter {
-      position: relative;
+/* ================= SCENE INFO ================= */
 
-      margin-top: 52px;
+.scene-info{
+  position:absolute;
 
-      padding: 16px 30px;
+  left:25px;
+  bottom:23px;
 
-      border:
-        1px solid
-        rgba(238, 243, 231, 0.3);
+  z-index:30;
 
-      border-radius: 100px;
+  max-width:420px;
+}
 
-      background:
-        rgba(255, 255, 255, 0.025);
+.scene-number{
+  font-size:9px;
+  letter-spacing:2px;
+  margin-bottom:8px;
+  opacity:.5;
+}
 
-      color: #eef2e8;
+.scene-title{
+  font-size:21px;
+  font-weight:400;
+  margin-bottom:5px;
+}
 
-      backdrop-filter: blur(10px);
+.scene-description{
+  font-size:10px;
+  line-height:1.6;
+  color:#656a63;
+}
 
-      font-size: 9px;
+/* reset */
 
-      letter-spacing: 2.8px;
+.reset-view{
+  position:absolute;
+  right:22px;
+  bottom:22px;
 
-      cursor: none;
+  border:1px solid #b9bdb5;
+  background:#eeeee9;
 
-      transition:
-        background 0.4s ease,
-        color 0.4s ease,
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
-    }
+  padding:9px 13px;
 
-    .enter:hover {
-      color: #07100a;
+  cursor:pointer;
 
-      background: #edf1e6;
+  font-size:9px;
+  letter-spacing:1px;
 
-      transform: scale(1.05);
+  z-index:40;
+}
 
-      box-shadow:
-        0 0 45px
-        rgba(177, 209, 157, 0.18);
-    }
+/* =========================================================
+   INDIVIDUAL SCENES
+========================================================= */
 
-    /* =========================
-       FOREST VITALITY
-    ========================== */
+.scene-object{
+  display:none;
+}
 
-    .vitality {
-      position: absolute;
+.model-viewer.detail .master-object{
+  display:none;
+}
 
-      left: 38px;
-      bottom: 30px;
+.model-viewer.detail .scene-object.active{
+  display:block;
+}
 
-      z-index: 20;
+/* detail floor */
 
-      width: 170px;
-    }
+.detail-floor{
+  position:absolute;
 
-    .vitality-label {
-      display: flex;
-      justify-content: space-between;
+  width:70%;
+  height:55%;
 
-      margin-bottom: 8px;
+  left:15%;
+  top:25%;
 
-      font-size: 8px;
-      letter-spacing: 1.8px;
+  background:#d2d5cd;
+  border:1px solid #b9beb5;
 
-      opacity: 0.5;
-    }
+  transform:rotateX(58deg) rotateZ(-25deg);
+}
 
-    .vitality-track {
-      width: 100%;
-      height: 1px;
+/* ENTRANCE */
 
-      background:
-        rgba(255, 255, 255, 0.15);
-    }
+.entrance-wall{
+  position:absolute;
 
-    .vitality-fill {
-      width: 12%;
-      height: 100%;
+  width:290px;
+  height:75px;
 
-      background:
-        rgba(204, 226, 188, 0.8);
+  background:#ecece7;
+  border:1px solid #b9bdb6;
 
-      box-shadow:
-        0 0 8px
-        rgba(176, 210, 154, 0.4);
-    }
+  left:50%;
+  top:40%;
 
-    .coordinates {
-      position: absolute;
+  transform:translate(-50%,-50%);
 
-      right: 38px;
-      bottom: 30px;
+  box-shadow:15px 18px 0 #c5c8c1;
+}
 
-      z-index: 20;
+.role-totem{
+  position:absolute;
 
-      font-size: 8px;
+  width:20px;
+  height:90px;
 
-      letter-spacing: 2px;
+  background:#9aa594;
 
-      opacity: 0.42;
-    }
+  top:46%;
+}
 
-    /* =========================
-       CUSTOM CURSOR
-    ========================== */
+.r1{left:34%;}
+.r2{left:43%;}
+.r3{left:52%;}
+.r4{left:61%;}
 
-    .cursor {
-      position: fixed;
+/* EXPLORE */
 
-      left: 0;
-      top: 0;
+.trail{
+  position:absolute;
 
-      width: 18px;
-      height: 18px;
+  width:430px;
+  height:30px;
 
-      border:
-        1px solid
-        rgba(220, 235, 209, 0.8);
+  background:#ecece7;
 
-      border-radius: 50%;
+  left:50%;
+  top:52%;
 
-      pointer-events: none;
+  transform:translate(-50%,-50%) rotate(-15deg);
 
-      transform:
-        translate(-50%, -50%);
+  border:1px solid #c3c6bf;
+}
 
-      z-index: 100;
+.water-node{
+  position:absolute;
 
-      transition:
-        width 0.25s ease,
-        height 0.25s ease,
-        background 0.25s ease;
-    }
+  width:120px;
+  height:70px;
 
-    .cursor-light {
-      position: fixed;
+  border-radius:50%;
 
-      left: 0;
-      top: 0;
+  background:#b9c4bd;
 
-      width: 500px;
-      height: 500px;
+  left:62%;
+  top:53%;
+}
 
-      border-radius: 50%;
+.observation{
+  position:absolute;
 
-      pointer-events: none;
+  width:80px;
+  height:80px;
 
-      transform:
-        translate(-50%, -50%);
+  border:1px solid #9fa59d;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(121, 180, 119, 0.13) 0%,
-          rgba(73, 127, 79, 0.07) 30%,
-          rgba(33, 73, 45, 0.025) 48%,
-          transparent 70%
-        );
+  left:34%;
+  top:37%;
 
-      filter: blur(10px);
+  border-radius:50%;
+}
 
-      z-index: 7;
-    }
+/* INVESTIGATION */
 
-    /* =========================
-       TRANSITION
-    ========================== */
+.village-house{
+  position:absolute;
 
-    .transition-cover {
-      position: fixed;
+  width:110px;
+  height:75px;
 
-      inset: 0;
+  background:#ecece7;
+  border:1px solid #b9bdb6;
 
-      background: #06100b;
+  box-shadow:10px 10px 0 #c5c8c1;
+}
 
-      z-index: 200;
+.house1{left:26%;top:33%;}
+.house2{right:25%;top:33%;}
+.house3{left:28%;bottom:25%;}
 
-      pointer-events: none;
+.clue-table{
+  position:absolute;
 
-      opacity: 0;
+  width:150px;
+  height:70px;
 
-      transition: opacity 1.2s ease;
-    }
+  left:50%;
+  top:50%;
 
-    .transition-cover.active {
-      opacity: 1;
-    }
+  transform:translate(-50%,-50%);
 
-    /* =========================
-       MOBILE
-    ========================== */
+  background:#a99f8f;
+}
 
-    @media (max-width: 700px) {
+/* RESTORE */
 
-      body {
-        cursor: auto;
-      }
+.interaction-unit{
+  position:absolute;
 
-      .cursor,
-      .cursor-light {
-        display: none;
-      }
+  width:150px;
+  height:170px;
 
-      .brand {
-        left: 20px;
-        top: 24px;
-      }
+  top:35%;
 
-      .chapter {
-        right: 20px;
-        top: 24px;
-      }
+  border:1px solid #adb2aa;
+  background:#e9e9e4;
 
-      h1 {
-        font-size: 52px;
-        letter-spacing: -2.5px;
-      }
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
 
-      .location {
-        font-size: 8px;
-        letter-spacing: 3px;
-      }
+  padding-bottom:18px;
 
-      .question {
-        font-size: 15px;
-      }
+  font-size:9px;
+  letter-spacing:1px;
+}
 
-      .enter {
-        cursor: pointer;
-      }
+.root-unit{left:17%;}
+.nutrient-unit{left:42%;}
+.nest-unit{right:17%;}
 
-      .vitality {
-        left: 20px;
-        bottom: 24px;
+/* MOTHER TREE */
 
-        width: 130px;
-      }
+.rebirth-ring{
+  position:absolute;
 
-      .coordinates {
-        right: 20px;
-        bottom: 24px;
-      }
+  width:380px;
+  height:260px;
 
-      .tree-2,
-      .tree-3 {
-        display: none;
-      }
-    }
+  border:25px solid #e9e9e4;
+  border-radius:50%;
 
-  </style>
+  left:50%;
+  top:52%;
+
+  transform:translate(-50%,-50%);
+
+  box-shadow:0 0 0 1px #aeb4aa;
+}
+
+.rebirth-tree{
+  position:absolute;
+
+  width:28px;
+  height:220px;
+
+  background:#767267;
+
+  left:50%;
+  top:26%;
+
+  transform:translateX(-50%);
+}
+
+.rebirth-tree::before{
+  content:"";
+
+  position:absolute;
+
+  width:270px;
+  height:190px;
+
+  border-radius:50%;
+
+  background:#93a08d;
+
+  left:50%;
+  top:-80px;
+
+  transform:translateX(-50%);
+}
+
+/* VILLAGE */
+
+.shop{
+  position:absolute;
+
+  width:150px;
+  height:100px;
+
+  background:#ecece7;
+  border:1px solid #b8bcb4;
+
+  box-shadow:12px 12px 0 #c6c9c2;
+
+  top:40%;
+}
+
+.cafe{left:20%;}
+.ipshop{left:43%;}
+.workshop{right:15%;}
+
+/* =========================================================
+   03 JOURNEY
+========================================================= */
+
+.journey-section{
+  background:#f7f6f2;
+}
+
+.journey-line{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+
+  margin-top:60px;
+}
+
+.journey-step{
+  position:relative;
+
+  min-height:300px;
+
+  border-top:1px solid #bfc2bb;
+
+  padding:25px 20px 0 0;
+}
+
+.journey-step::before{
+  content:"";
+
+  position:absolute;
+
+  width:7px;
+  height:7px;
+
+  background:#343a34;
+  border-radius:50%;
+
+  top:-4px;
+  left:0;
+}
+
+.step-visual{
+  height:130px;
+  position:relative;
+}
+
+/* Simple people */
+
+.little-person{
+  position:absolute;
+
+  left:50%;
+  bottom:20px;
+
+  width:12px;
+  height:65px;
+
+  transform:translateX(-50%);
+}
+
+.little-person .head{
+  position:absolute;
+
+  width:12px;
+  height:12px;
+
+  border-radius:50%;
+
+  background:#353a35;
+
+  left:0;
+  top:0;
+}
+
+.little-person .body{
+  position:absolute;
+
+  width:4px;
+  height:32px;
+
+  background:#353a35;
+
+  left:4px;
+  top:14px;
+}
+
+.little-person .body::before,
+.little-person .body::after{
+  content:"";
+
+  position:absolute;
+
+  width:3px;
+  height:24px;
+
+  background:#353a35;
+
+  top:25px;
+
+  transform-origin:top;
+}
+
+.little-person .body::before{
+  transform:rotate(15deg);
+}
+
+.little-person .body::after{
+  transform:rotate(-15deg);
+  right:0;
+}
+
+/* explore walking */
+
+.walk{
+  transform:translateX(-50%) rotate(6deg);
+}
+
+/* discover crouch */
+
+.crouch{
+  transform:translateX(-50%) scaleY(.7) rotate(25deg);
+  bottom:8px;
+}
+
+/* decode */
+
+.second-person{
+  left:66%;
+  transform:translateX(-50%) scale(.8);
+}
+
+.board{
+  position:absolute;
+
+  width:55px;
+  height:45px;
+
+  border:1px solid #777d76;
+
+  left:48%;
+  bottom:22px;
+}
+
+/* restore */
+
+.plant{
+  position:absolute;
+
+  left:63%;
+  bottom:18px;
+
+  width:3px;
+  height:35px;
+
+  background:#667363;
+}
+
+.plant::before,
+.plant::after{
+  content:"";
+
+  position:absolute;
+
+  width:17px;
+  height:8px;
+
+  border-radius:50%;
+
+  background:#9ba797;
+
+  top:8px;
+}
+
+.plant::before{
+  left:-15px;
+  transform:rotate(25deg);
+}
+
+.plant::after{
+  right:-15px;
+  transform:rotate(-25deg);
+}
+
+/* rebirth tree */
+
+.mini-tree{
+  position:absolute;
+
+  width:6px;
+  height:70px;
+
+  background:#6e6b62;
+
+  left:50%;
+  bottom:12px;
+}
+
+.mini-tree::before{
+  content:"";
+
+  position:absolute;
+
+  width:80px;
+  height:55px;
+
+  border-radius:50%;
+
+  background:#a0aa9a;
+
+  left:50%;
+  top:-25px;
+
+  transform:translateX(-50%);
+}
+
+.step-num{
+  font-size:9px;
+  opacity:.45;
+  margin-bottom:8px;
+}
+
+.step-title{
+  font-size:24px;
+  margin-bottom:8px;
+}
+
+.step-cn{
+  font-size:11px;
+  margin-bottom:15px;
+  color:#747871;
+}
+
+.step-description{
+  max-width:170px;
+
+  font-size:10px;
+  line-height:1.6;
+
+  color:#777b74;
+}
+
+/* ================= BUSINESS ================= */
+
+.business-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+
+  border-top:1px solid #c5c7c1;
+}
+
+.business-item{
+  padding:35px 20px;
+  min-height:180px;
+
+  border-right:1px solid #d1d3cd;
+}
+
+.business-item:last-child{
+  border-right:none;
+}
+
+.business-icon{
+  font-size:30px;
+  font-weight:200;
+  margin-bottom:40px;
+}
+
+.business-name{
+  font-size:11px;
+  margin-bottom:8px;
+}
+
+.business-en{
+  font-size:9px;
+  color:#8a8e87;
+}
+
+/* ================= FINAL ================= */
+
+.final{
+  min-height:520px;
+
+  padding:90px 4vw;
+
+  background:#d9ddd5;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.final h2{
+  font-size:clamp(50px,7vw,100px);
+  font-weight:300;
+  line-height:.95;
+  letter-spacing:-4px;
+
+  max-width:800px;
+}
+
+.final-bottom{
+  display:flex;
+  justify-content:space-between;
+
+  padding-top:25px;
+
+  border-top:1px solid #adb2aa;
+
+  font-size:9px;
+  letter-spacing:1px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    letter-spacing:-5px;
+  }
+
+  .section-header{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .description{
+    margin-left:0;
+  }
+
+  .world-layout{
+    grid-template-columns:1fr;
+  }
+
+  .masterplan-layout{
+    grid-template-columns:1fr;
+  }
+
+  .zone-menu{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .model-viewer{
+    min-height:570px;
+  }
+
+  .journey-line{
+    grid-template-columns:1fr;
+  }
+
+  .journey-step{
+    border-top:1px solid #bbb;
+  }
+
+  .business-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
 </head>
-
 
 <body>
 
-  <main class="forest" id="forest">
+<!-- NAV -->
 
-    <!-- Forest atmosphere -->
+<nav>
+  <a href="#" class="logo">LIVING FOREST</a>
 
-    <div class="forest-light"></div>
-
-    <div class="tree tree-1"></div>
-    <div class="tree tree-2"></div>
-    <div class="tree tree-3"></div>
-    <div class="tree tree-4"></div>
-
-    <div class="ground"></div>
-
-    <div class="fog"></div>
-    <div class="fog fog-2"></div>
+  <div class="nav-links">
+    <a href="#world">WORLD</a>
+    <a href="#masterplan">MASTERPLAN</a>
+    <a href="#journey">JOURNEY</a>
+    <a href="#business">BUSINESS</a>
+  </div>
+</nav>
 
 
-    <!-- Fireflies -->
+<!-- HERO -->
 
-    <div class="fireflies">
+<section class="hero">
 
-      <span class="firefly"></span>
-      <span class="firefly"></span>
-      <span class="firefly"></span>
-      <span class="firefly"></span>
+  <div class="hero-copy">
 
-      <span class="firefly"></span>
-      <span class="firefly"></span>
-      <span class="firefly"></span>
-      <span class="firefly"></span>
-
+    <div class="hero-small">
+      HONG KONG · PEOPLE · NATURE
     </div>
 
+    <h1>
+      LIVING<br>
+      FOREST
+    </h1>
 
-    <!-- Header -->
+    <p>
+      A living forest restored by everyone's adventure.
+      An immersive ecological experience rooted in
+      Hong Kong's native forest.
+    </p>
 
-    <div class="brand">
-      LIVING FOREST
+  </div>
+
+  <div class="hero-visual">
+
+    <div class="mountain"></div>
+
+    <div class="hero-tree"></div>
+
+    <div class="person p1"></div>
+    <div class="person p2"></div>
+    <div class="person p3"></div>
+
+  </div>
+
+</section>
+
+
+<!-- 01 WORLD -->
+
+<section class="section" id="world">
+
+  <div class="section-header">
+
+    <div class="number">
+      01 / WORLD
     </div>
 
-    <div class="chapter">
-      PROLOGUE · 00
+    <h2 class="title">
+      A Forest<br>
+      That Remembers.
+    </h2>
+
+  </div>
+
+  <div class="world-layout">
+
+    <p class="world-copy">
+      The forest is fading.
+      Its memories disappear with every ancient tree.
+      Visitors enter not as spectators,
+      but as Forest Guardians.
+    </p>
+
+    <div class="world-image"></div>
+
+  </div>
+
+</section>
+
+
+<!-- 02 MASTERPLAN -->
+
+<section
+  class="section masterplan-section"
+  id="masterplan"
+>
+
+  <div class="section-header">
+
+    <div class="number">
+      02 / MASTERPLAN
     </div>
 
+    <h2 class="title">
+      Explore The<br>
+      Living System.
+    </h2>
 
-    <!-- Main story -->
+  </div>
 
-    <section class="content">
+  <p class="description">
+    Six connected zones form one continuous ecological
+    journey. Select a zone to enter its spatial model.
+    Drag the model to explore the masterplan.
+  </p>
 
-      <div class="location">
-        HONG KONG · 22.3193° N
-      </div>
 
-      <h1>
-        THE FOREST
-        <br />
-        IS FORGETTING.
-      </h1>
+  <div class="masterplan-layout">
 
-      <p class="question">
-        What if the forest could remember?
-      </p>
+
+    <!-- ZONE MENU -->
+
+    <div class="zone-menu">
 
       <button
-        class="enter"
-        id="enterButton"
+        class="zone-button"
+        data-zone="entrance"
       >
-        ENTER THE LIVING FOREST
+        <span class="zone-num">01</span>
+
+        <span class="zone-name">
+          Entrance
+          <span class="zone-cn">
+            迎宾启幕区
+          </span>
+        </span>
       </button>
 
-    </section>
+
+      <button
+        class="zone-button"
+        data-zone="explore"
+      >
+        <span class="zone-num">02</span>
+
+        <span class="zone-name">
+          Forest Exploration
+          <span class="zone-cn">
+            森林探索区
+          </span>
+        </span>
+      </button>
 
 
-    <!-- Forest vitality -->
+      <button
+        class="zone-button"
+        data-zone="investigate"
+      >
+        <span class="zone-num">03</span>
 
-    <div class="vitality">
+        <span class="zone-name">
+          Story Investigation
+          <span class="zone-cn">
+            剧情推理区
+          </span>
+        </span>
+      </button>
 
-      <div class="vitality-label">
+
+      <button
+        class="zone-button"
+        data-zone="restore"
+      >
+        <span class="zone-num">04</span>
+
+        <span class="zone-name">
+          Ecological Restoration
+          <span class="zone-cn">
+            生态修复区
+          </span>
+        </span>
+      </button>
+
+
+      <button
+        class="zone-button"
+        data-zone="mother"
+      >
+        <span class="zone-num">05</span>
+
+        <span class="zone-name">
+          Mother Tree
+          <span class="zone-cn">
+            核心母树重生区
+          </span>
+        </span>
+      </button>
+
+
+      <button
+        class="zone-button"
+        data-zone="village"
+      >
+        <span class="zone-num">06</span>
+
+        <span class="zone-name">
+          Forest Village
+          <span class="zone-cn">
+            配套业态区
+          </span>
+        </span>
+      </button>
+
+    </div>
+
+
+    <!-- VIEWER -->
+
+    <div
+      class="model-viewer"
+      id="viewer"
+    >
+
+      <div class="viewer-top">
 
         <span>
-          FOREST VITALITY
+          INTERACTIVE MASTERPLAN
         </span>
 
-        <span>
-          12%
+        <span class="drag-label">
+          DRAG TO ROTATE
         </span>
 
       </div>
 
-      <div class="vitality-track">
+
+      <!-- MASTER MODEL -->
+
+      <div class="stage master-object">
 
         <div
-          class="vitality-fill"
-        ></div>
+          class="model"
+          id="masterModel"
+        >
 
+          <div class="model-ground"></div>
+
+          <div class="path path-a"></div>
+          <div class="path path-b"></div>
+          <div class="path path-c"></div>
+
+
+          <div class="tree-model t1"></div>
+          <div class="tree-model t2"></div>
+          <div class="tree-model t3"></div>
+          <div class="tree-model t4"></div>
+          <div class="tree-model t5"></div>
+          <div class="tree-model t6"></div>
+          <div class="tree-model t7"></div>
+          <div class="tree-model t8"></div>
+
+
+          <div class="building entrance-building"></div>
+
+          <div class="building explore-building"></div>
+
+          <div class="building investigate-building"></div>
+
+          <div class="building restore-building"></div>
+
+          <div class="building village-building"></div>
+
+          <div class="mother-tree-model"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- labels -->
+
+      <div class="master-object model-label label1">
+        01 Entrance
+      </div>
+
+      <div class="master-object model-label label2">
+        02 Exploration
+      </div>
+
+      <div class="master-object model-label label3">
+        03 Investigation
+      </div>
+
+      <div class="master-object model-label label4">
+        04 Restoration
+      </div>
+
+      <div class="master-object model-label label5">
+        05 Mother Tree
+      </div>
+
+      <div class="master-object model-label label6">
+        06 Village
+      </div>
+
+
+      <!-- 01 ENTRANCE DETAIL -->
+
+      <div
+        class="scene-object"
+        id="scene-entrance"
+      >
+
+        <div class="detail-floor"></div>
+
+        <div class="entrance-wall"></div>
+
+        <div class="role-totem r1"></div>
+        <div class="role-totem r2"></div>
+        <div class="role-totem r3"></div>
+        <div class="role-totem r4"></div>
+
+      </div>
+
+
+      <!-- 02 EXPLORE DETAIL -->
+
+      <div
+        class="scene-object"
+        id="scene-explore"
+      >
+
+        <div class="detail-floor"></div>
+
+        <div class="trail"></div>
+
+        <div class="water-node"></div>
+
+        <div class="observation"></div>
+
+        <div class="tree-model t1"></div>
+        <div class="tree-model t3"></div>
+        <div class="tree-model t5"></div>
+        <div class="tree-model t7"></div>
+
+      </div>
+
+
+      <!-- 03 INVESTIGATION -->
+
+      <div
+        class="scene-object"
+        id="scene-investigate"
+      >
+
+        <div class="detail-floor"></div>
+
+        <div class="village-house house1"></div>
+        <div class="village-house house2"></div>
+        <div class="village-house house3"></div>
+
+        <div class="clue-table"></div>
+
+      </div>
+
+
+      <!-- 04 RESTORATION -->
+
+      <div
+        class="scene-object"
+        id="scene-restore"
+      >
+
+        <div class="detail-floor"></div>
+
+        <div class="interaction-unit root-unit">
+          ROOT / WATER
+        </div>
+
+        <div class="interaction-unit nutrient-unit">
+          NUTRIENT
+        </div>
+
+        <div class="interaction-unit nest-unit">
+          BIRD NEST
+        </div>
+
+      </div>
+
+
+      <!-- 05 MOTHER TREE -->
+
+      <div
+        class="scene-object"
+        id="scene-mother"
+      >
+
+        <div class="detail-floor"></div>
+
+        <div class="rebirth-ring"></div>
+
+        <div class="rebirth-tree"></div>
+
+      </div>
+
+
+      <!-- 06 VILLAGE -->
+
+      <div
+        class="scene-object"
+        id="scene-village"
+      >
+
+        <div class="detail-floor"></div>
+
+        <div class="shop cafe">
+        </div>
+
+        <div class="shop ipshop">
+        </div>
+
+        <div class="shop workshop">
+        </div>
+
+      </div>
+
+
+      <!-- INFORMATION -->
+
+      <div class="scene-info">
+
+        <div
+          class="scene-number"
+          id="sceneNumber"
+        >
+          00 / MASTERPLAN
+        </div>
+
+        <h3
+          class="scene-title"
+          id="sceneTitle"
+        >
+          Living Forest
+        </h3>
+
+        <p
+          class="scene-description"
+          id="sceneDescription"
+        >
+          Select one of the six zones to explore
+          its spatial model.
+        </p>
+
+      </div>
+
+
+      <button
+        class="reset-view"
+        id="resetView"
+      >
+        MASTERPLAN
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- 03 JOURNEY -->
+
+<section
+  class="section journey-section"
+  id="journey"
+>
+
+  <div class="section-header">
+
+    <div class="number">
+      03 / JOURNEY
+    </div>
+
+    <h2 class="title">
+      From Discovery<br>
+      To Rebirth.
+    </h2>
+
+  </div>
+
+
+  <div class="journey-line">
+
+
+    <!-- EXPLORE -->
+
+    <div class="journey-step">
+
+      <div class="step-visual">
+
+        <div class="little-person walk">
+
+          <div class="head"></div>
+
+          <div class="body"></div>
+
+        </div>
+
+      </div>
+
+      <div class="step-num">01</div>
+
+      <div class="step-title">
+        Explore
+      </div>
+
+      <div class="step-cn">
+        探索
+      </div>
+
+      <p class="step-description">
+        Enter the forest and begin
+        observing the changing environment.
+      </p>
+
+    </div>
+
+
+    <!-- DISCOVER -->
+
+    <div class="journey-step">
+
+      <div class="step-visual">
+
+        <div class="little-person crouch">
+
+          <div class="head"></div>
+
+          <div class="body"></div>
+
+        </div>
+
+        <div class="plant"></div>
+
+      </div>
+
+      <div class="step-num">02</div>
+
+      <div class="step-title">
+        Discover
+      </div>
+
+      <div class="step-cn">
+        发现
+      </div>
+
+      <p class="step-description">
+        Find ecological clues hidden
+        throughout the forest.
+      </p>
+
+    </div>
+
+
+    <!-- DECODE -->
+
+    <div class="journey-step">
+
+      <div class="step-visual">
+
+        <div class="board"></div>
+
+        <div class="little-person">
+
+          <div class="head"></div>
+
+          <div class="body"></div>
+
+        </div>
+
+        <div class="little-person second-person">
+
+          <div class="head"></div>
+
+          <div class="body"></div>
+
+        </div>
+
+      </div>
+
+      <div class="step-num">03</div>
+
+      <div class="step-title">
+        Decode
+      </div>
+
+      <div class="step-cn">
+        解密
+      </div>
+
+      <p class="step-description">
+        Connect evidence and understand
+        the causes behind ecological decline.
+      </p>
+
+    </div>
+
+
+    <!-- RESTORE -->
+
+    <div class="journey-step">
+
+      <div class="step-visual">
+
+        <div class="little-person crouch">
+
+          <div class="head"></div>
+
+          <div class="body"></div>
+
+        </div>
+
+        <div class="plant"></div>
+
+      </div>
+
+      <div class="step-num">04</div>
+
+      <div class="step-title">
+        Restore
+      </div>
+
+      <div class="step-cn">
+        修复
+      </div>
+
+      <p class="step-description">
+        Repair habitats through
+        collaborative physical interaction.
+      </p>
+
+    </div>
+
+
+    <!-- REBIRTH -->
+
+    <div class="journey-step">
+
+      <div class="step-visual">
+
+        <div class="mini-tree"></div>
+
+        <div
+          class="little-person"
+          style="left:30%; transform:scale(.75);"
+        >
+
+          <div class="head"></div>
+          <div class="body"></div>
+
+        </div>
+
+        <div
+          class="little-person"
+          style="left:72%; transform:scale(.75);"
+        >
+
+          <div class="head"></div>
+          <div class="body"></div>
+
+        </div>
+
+      </div>
+
+      <div class="step-num">05</div>
+
+      <div class="step-title">
+        Rebirth
+      </div>
+
+      <div class="step-cn">
+        重生
+      </div>
+
+      <p class="step-description">
+        Return Forest Marks and collectively
+        awaken the Mother Tree.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- BUSINESS -->
+
+<section
+  class="section"
+  id="business"
+>
+
+  <div class="section-header">
+
+    <div class="number">
+      04 / BUSINESS
+    </div>
+
+    <h2 class="title">
+      Beyond A<br>
+      Single Visit.
+    </h2>
+
+  </div>
+
+
+  <div class="business-grid">
+
+    <div class="business-item">
+
+      <div class="business-icon">○</div>
+
+      <div class="business-name">
+        门票收入
+      </div>
+
+      <div class="business-en">
+        ADMISSION
       </div>
 
     </div>
 
 
-    <div class="coordinates">
-      114.1694° E · HONG KONG
+    <div class="business-item">
+
+      <div class="business-icon">⌇</div>
+
+      <div class="business-name">
+        主题餐饮
+      </div>
+
+      <div class="business-en">
+        F&B
+      </div>
+
     </div>
 
-  </main>
+
+    <div class="business-item">
+
+      <div class="business-icon">□</div>
+
+      <div class="business-name">
+        IP 文创
+      </div>
+
+      <div class="business-en">
+        MERCHANDISE
+      </div>
+
+    </div>
 
 
-  <!-- Mouse interaction -->
+    <div class="business-item">
 
-  <div class="cursor"></div>
+      <div class="business-icon">◇</div>
 
-  <div class="cursor-light"></div>
+      <div class="business-name">
+        收藏体系
+      </div>
 
+      <div class="business-en">
+        COLLECTIBLES
+      </div>
 
-  <!-- Transition -->
-
-  <div
-    class="transition-cover"
-    id="transitionCover"
-  ></div>
-
-
-  <script>
-
-    /* =========================
-       CURSOR
-    ========================== */
-
-    const cursor =
-      document.querySelector(".cursor");
-
-    const cursorLight =
-      document.querySelector(".cursor-light");
-
-    document.addEventListener(
-      "mousemove",
-      function (event) {
-
-        cursor.style.left =
-          event.clientX + "px";
-
-        cursor.style.top =
-          event.clientY + "px";
-
-        cursorLight.style.left =
-          event.clientX + "px";
-
-        cursorLight.style.top =
-          event.clientY + "px";
-
-      }
-    );
+    </div>
 
 
-    /* =========================
-       ENTER BUTTON
-    ========================== */
+    <div class="business-item">
 
-    const enterButton =
+      <div class="business-icon">▦</div>
+
+      <div class="business-name">
+        季节运营
+      </div>
+
+      <div class="business-en">
+        SEASONAL
+      </div>
+
+    </div>
+
+
+    <div class="business-item">
+
+      <div class="business-icon">↻</div>
+
+      <div class="business-name">
+        复游体系
+      </div>
+
+      <div class="business-en">
+        REVISIT
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section class="final">
+
+  <h2>
+    MORE PEOPLE.<br>
+    A HEALTHIER FOREST.<br>
+    A BRIGHTER TOMORROW.
+  </h2>
+
+  <div class="final-bottom">
+
+    <span>
+      LIVING FOREST · HONG KONG
+    </span>
+
+    <span>
+      PROTECTING NATURE IS THE ADVENTURE.
+    </span>
+
+  </div>
+
+</section>
+
+
+<script>
+
+/* =========================================================
+   MASTERPLAN DATA
+========================================================= */
+
+const zoneData = {
+
+  entrance:{
+    number:"01 / ENTRANCE",
+    title:"Entrance · 迎宾启幕区",
+    description:
+      "Visitors enter as Forest Guardians, receive their mission and choose a role: Pathfinder, Listener, Keeper or Messenger."
+  },
+
+  explore:{
+    number:"02 / EXPLORATION",
+    title:"Forest Exploration · 森林探索区",
+    description:
+      "Visitors follow forest trails, observe ecological changes and discover hidden clues around water, wildlife and vegetation."
+  },
+
+  investigate:{
+    number:"03 / INVESTIGATION",
+    title:"Story Investigation · 剧情推理区",
+    description:
+      "A small forest settlement becomes an investigation space where visitors connect clues and uncover the relationship between habitat loss and wildlife conflict."
+  },
+
+  restore:{
+    number:"04 / RESTORATION",
+    title:"Ecological Restoration · 生态修复区",
+    description:
+      "Three physical interactions translate ecological knowledge into play: finding water through roots, transporting nutrients and rebuilding bird habitats."
+  },
+
+  mother:{
+    number:"05 / MOTHER TREE",
+    title:"Mother Tree · 核心母树重生区",
+    description:
+      "Forest Marks collected throughout the journey converge here. Collective participation gradually restores the roots, canopy and soundscape of the Mother Tree."
+  },
+
+  village:{
+    number:"06 / FOREST VILLAGE",
+    title:"Forest Village · 配套业态区",
+    description:
+      "A compact courtyard integrates Forest Café, IP merchandise, workshops, rest areas and accessible visitor services."
+  }
+
+};
+
+
+/* =========================================================
+   SELECT ZONE
+========================================================= */
+
+const viewer =
+  document.getElementById("viewer");
+
+const buttons =
+  document.querySelectorAll(".zone-button");
+
+const scenes =
+  document.querySelectorAll(".scene-object");
+
+const sceneNumber =
+  document.getElementById("sceneNumber");
+
+const sceneTitle =
+  document.getElementById("sceneTitle");
+
+const sceneDescription =
+  document.getElementById("sceneDescription");
+
+
+buttons.forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    const zone =
+      button.dataset.zone;
+
+    viewer.classList.add("detail");
+
+
+    buttons.forEach(item=>{
+      item.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+
+    scenes.forEach(scene=>{
+      scene.classList.remove("active");
+    });
+
+
+    const selected =
       document.getElementById(
-        "enterButton"
+        "scene-" + zone
       );
 
-    const transitionCover =
-      document.getElementById(
-        "transitionCover"
+    selected.classList.add("active");
+
+
+    sceneNumber.textContent =
+      zoneData[zone].number;
+
+    sceneTitle.textContent =
+      zoneData[zone].title;
+
+    sceneDescription.textContent =
+      zoneData[zone].description;
+
+  });
+
+});
+
+
+/* =========================================================
+   RETURN MASTERPLAN
+========================================================= */
+
+const resetButton =
+  document.getElementById("resetView");
+
+resetButton.addEventListener("click",()=>{
+
+  viewer.classList.remove("detail");
+
+  buttons.forEach(item=>{
+    item.classList.remove("active");
+  });
+
+  scenes.forEach(scene=>{
+    scene.classList.remove("active");
+  });
+
+  sceneNumber.textContent =
+    "00 / MASTERPLAN";
+
+  sceneTitle.textContent =
+    "Living Forest";
+
+  sceneDescription.textContent =
+    "Select one of the six zones to explore its spatial model.";
+
+});
+
+
+/* =========================================================
+   DRAG MASTERPLAN
+========================================================= */
+
+const masterModel =
+  document.getElementById("masterModel");
+
+let dragging = false;
+
+let startX = 0;
+let startY = 0;
+
+let rotationZ = -28;
+let rotationX = 59;
+
+
+viewer.addEventListener(
+  "pointerdown",
+  event=>{
+
+    if(
+      event.target.closest("button")
+    ){
+      return;
+    }
+
+    if(
+      viewer.classList.contains("detail")
+    ){
+      return;
+    }
+
+    dragging = true;
+
+    startX = event.clientX;
+    startY = event.clientY;
+
+    viewer.setPointerCapture(
+      event.pointerId
+    );
+
+  }
+);
+
+
+viewer.addEventListener(
+  "pointermove",
+  event=>{
+
+    if(!dragging) return;
+
+    const dx =
+      event.clientX - startX;
+
+    const dy =
+      event.clientY - startY;
+
+
+    rotationZ += dx * .15;
+
+    rotationX -= dy * .08;
+
+
+    rotationX =
+      Math.max(
+        35,
+        Math.min(72,rotationX)
       );
 
 
-    enterButton.addEventListener(
-      "mouseenter",
-      function () {
-
-        cursor.style.width =
-          "46px";
-
-        cursor.style.height =
-          "46px";
-
-      }
-    );
+    masterModel.style.transform =
+      `rotateX(${rotationX}deg)
+       rotateZ(${rotationZ}deg)`;
 
 
-    enterButton.addEventListener(
-      "mouseleave",
-      function () {
+    startX = event.clientX;
+    startY = event.clientY;
 
-        cursor.style.width =
-          "18px";
-
-        cursor.style.height =
-          "18px";
-
-      }
-    );
+  }
+);
 
 
-    /* =========================
-       NEXT CHAPTER
-       We will build this next.
-    ========================== */
+viewer.addEventListener(
+  "pointerup",
+  ()=>{
+    dragging = false;
+  }
+);
 
-    enterButton.addEventListener(
-      "click",
-      function () {
 
-        transitionCover.classList.add(
-          "active"
-        );
+viewer.addEventListener(
+  "pointercancel",
+  ()=>{
+    dragging = false;
+  }
+);
 
-        setTimeout(
-          function () {
-
-            transitionCover.classList.remove(
-              "active"
-            );
-
-          },
-          1400
-        );
-
-      }
-    );
-
-  </script>
+</script>
 
 </body>
 </html>
